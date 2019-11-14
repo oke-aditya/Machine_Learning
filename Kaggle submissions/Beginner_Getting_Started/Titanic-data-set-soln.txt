@@ -1,0 +1,3 @@
+model = svm.SVC(kernel = 'poly',degree = 5, random_state = 31, gamma = 0.28, C = 0.22)
+
+https://www.kaggle.com/gunesevitan/advanced-feature-engineering-tutorial-with-titanic
