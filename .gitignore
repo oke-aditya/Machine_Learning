@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Tesnorboard_logdir
+Learning Keras/my_log_dir
