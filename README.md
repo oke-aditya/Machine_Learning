@@ -1,4 +1,4 @@
-# Machine_Learning
+# Machine Learning Tutorials and Examples
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/oke-aditya/Machine_Learning/master)
 
