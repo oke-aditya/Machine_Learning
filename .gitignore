@@ -109,3 +109,6 @@ Learning Keras/my_log_dir
 # Tensorflow graph logs
 log
 Learning_Tensorflow/log
+
+# some Q_tables
+/Learning_RL/Q_Learning/q_tables
