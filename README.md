@@ -7,6 +7,7 @@ Tutorials, examples for Machine Learning.
 - Credits to Learning Keras goes to Francois Chollet's book Deep Learning in Python.
 - Also some of the notebooks are from sentdex www.pythonprogramming.net
 - Most notebooks are scikit-learn implementations as given in documentation.
+- The Kaggle submissions are my codes. They aren't take from any resource. 
 
 
 - Binder link https://mybinder.org/v2/gh/oke-aditya/Machine_Learning/master
