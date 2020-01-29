@@ -1,4 +1,4 @@
-tensorflow==2.0.0
+tensorflow==2.0.1
 keras==2.2.4
 opencv==4.1.2.30
 matplotlib==3.0.2
