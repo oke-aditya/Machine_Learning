@@ -112,3 +112,5 @@ Learning_Tensorflow/log
 
 # some Q_tables
 /Learning_RL/Q_Learning/q_tables
+Face_detection/known_images/
+Face_detection/uknown_images/
