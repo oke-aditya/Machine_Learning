@@ -9,7 +9,7 @@ UNKNOWN_FACES_DIR = r"uknown_images"
 # Lower tolereance for getting perfect matches.
 # Default = 0.6
 
-TOLERENCE = 0.3
+TOLERENCE = 0.6
 # Frame drawing
 FRAME_THICKNESS = 3
 FONT_THICKNESS = 2
@@ -31,7 +31,7 @@ def name_to_color(name):
 for name in tqdm(os.listdir(KNOWN_FACES_DIR)):
     for filename in os.listdir(os.path.join(KNOWN_FACES_DIR, name)):
         image = face_recognition.load_image_file(os.path.join(os.path.join(KNOWN_FACES_DIR, name), filename))
-        encoding = face_recognition.face_encodings(image)[0]          # Encode only the first face. Sinlge shot
+        encoding = face_recognition.face_encodings(image)[0]          # Encode only the first face. Single shot
         # We don't need to know where the knwon faces are here !!!!!!
         known_faces.append(encoding)
         known_names.append(name)
