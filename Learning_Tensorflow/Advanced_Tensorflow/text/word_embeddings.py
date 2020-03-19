@@ -235,10 +235,10 @@ result.shape
 # Learning Embeddings from scratch
 """
 
-dataset, info = tfds.load('imdb_reviews/subwords8k', with_info=True,
-                          as_supervised=True)
-
-train_dataset, test_dataset = dataset['train'], dataset['test']
+(train_data, test_data), info = tfds.load(
+    'imdb_reviews/subwords8k', 
+    split = (tfds.Split.TRAIN, tfds.Split.TEST), 
+    with_info=True, as_supervised=True)
 
 encoder = info.features['text'].encoder
 encoder.subwords[:20]
@@ -247,13 +247,11 @@ encoder.subwords[:20]
 The data is tokenized already. Othewise you would have to additionally tokenize the data before feeding
 """
 
-BUFFER_SIZE = 10000
-BATCH_SIZE = 64
+# BUFFER_SIZE = 10000
+# BATCH_SIZE = 64
 
-train_dataset = train_dataset.shuffle(BUFFER_SIZE)
-train_dataset = train_dataset.padded_batch(BATCH_SIZE)
-
-test_dataset = test_dataset.padded_batch(BATCH_SIZE)
+train_batches = train_data.shuffle(1000).padded_batch(10, padded_shapes=([None], []))
+test_batches = test_data.shuffle(1000).padded_batch(10, padded_shapes=([None], []))
 
 """In this case it is a "Continuous bag of words" style model.
 
@@ -266,7 +264,7 @@ This fixed-length output vector is piped through a fully-connected (Dense) layer
 The last layer is densely connected with a single output node. Using the sigmoid activation function, this value is a float between 0 and 1, representing a probability (or confidence level) that the review is positive.
 """
 
-embedding_dim=16
+embedding_dim = 16
 
 model = tf.keras.Sequential([
   layers.Embedding(encoder.vocab_size, embedding_dim),
