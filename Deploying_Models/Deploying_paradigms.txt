@@ -1,0 +1,18 @@
+Amazing quality content sir ..
+Key take aways:
+
+1) Model deployment has patterns depending on priority of business process
+e.g. it may be that speed is the key(real time) or it can be processing huge volumes of data overnight or monthly (batch jobs).
+
+2) Below are the patterns and they are ordered from simple to hard(typically):
+2.1 complete Batch - e.g. historical data accumulated over time e.g. Quaterly risk assessment .
+Infra - may need distributed computing to process huge volume of data .Spark ML . 
+
+2.2 Near Real time - No need to finish in micro or milli second & need not give response back to customer.
+e.g. capture events in business and show on dashboard
+
+2.3 Real time - need to respond to customer asap as it may result in business loss
+e.g. credit card transaction fraud detection
+
+2.4 Edge - deployed on low powered ,low CPU , low memory devices e.g. phone , raspberry PI . 
+Model needs to be memory efficient . May have to develop simple models or do post model pruning .
