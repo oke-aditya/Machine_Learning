@@ -1,9 +1,10 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*.__pycache__
 *.py[cod]
 *$py.class
 Deploying_Models/models/
 *.vscode
+*.log
 
 # C extensions
 *.so
