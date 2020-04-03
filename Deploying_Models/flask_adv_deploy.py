@@ -6,8 +6,8 @@ import logging
 
 app = Flask(__name__)
 padding_size = 1000
-model = tf.keras.models.load_model('models\sentiment_analysis.hdf5')
-text_encoder = tfds.features.text.TokenTextEncoder.load_from_file('models\sa_encoder.vocab')
+model = tf.keras.models.load_model('sentiment_analysis.hdf5')
+text_encoder = tfds.features.text.TokenTextEncoder.load_from_file('sa_encoder.vocab')
 print("--------------Model and vocabulary loaded--------------")
 
 ###
