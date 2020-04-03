@@ -5,6 +5,8 @@
 Deploying_Models/models/
 *.vscode
 *.log
+*.h5
+*.hdf5
 
 # C extensions
 *.so
