@@ -1,0 +1,123 @@
+PS C:\Users\hp> minikube start                                                                                                                                                                                                               * minikube v1.9.2 on Microsoft Windows 10 Pro 10.0.18363 Build 18363
+* Automatically selected the hyperv driver                                                                                                                                                                                                   * Starting control plane node m01 in cluster minikube                                                                                                                                                                                        * Creating hyperv VM (CPUs=2, Memory=2200MB, Disk=20000MB) ...                                                                                                                                                                               * Found network options:
+  - NO_PROXY=192.168.99.100
+  - no_proxy=192.168.99.100
+* Preparing Kubernetes v1.18.0 on Docker 19.03.8 ...
+  - env NO_PROXY=192.168.99.100
+  - env NO_PROXY=192.168.99.100
+* Enabling addons: default-storageclass, storage-provisioner
+* Done! kubectl is now configured to use "minikube"
+
+! C:\Program Files\Docker\Docker\resources\bin\kubectl.exe is v1.15.5, which may be incompatible with Kubernetes v1.18.0.
+* You can also use 'minikube kubectl -- get pods' to invoke a matching version
+PS C:\Users\hp> minikube dashboard                                                                                                                                                                                                           * Enabling dashboard ...
+* Verifying dashboard health ...
+* Launching proxy ...
+* Verifying proxy health ...
+* Opening http://127.0.0.1:54324/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+PS C:\Users\hp> kubectl show pods                                                                                                                                                                                                            Error: unknown command "show" for "kubectl"
+Run 'kubectl --help' for usage.
+unknown command "show" for "kubectl"
+PS C:\Users\hp> kubectl get pods                                                                                                                                                                                                             No resources found.
+PS C:\Users\hp> kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node                                                                                                                                   deployment.apps/hello-node created
+PS C:\Users\hp> kubectl get deployments                                                                                                                                                                                                      NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+hello-node   0/1     1            0           9s
+PS C:\Users\hp> kubectl get pods                                                                                                                                                                                                             NAME                          READY   STATUS              RESTARTS   AGE
+hello-node-677b9cfc6b-qc7nc   0/1     ContainerCreating   0          23s
+PS C:\Users\hp> kubectl get deployments                                                                                                                                                                                                      NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+hello-node   0/1     1            0           59s
+PS C:\Users\hp> kubectl get pods                                                                                                                                                                                                             NAME                          READY   STATUS              RESTARTS   AGE
+hello-node-677b9cfc6b-qc7nc   0/1     ContainerCreating   0          63s
+PS C:\Users\hp> kubectl get deployments                                                                                                                                                                                                      NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+hello-node   1/1     1            1           2m6s
+PS C:\Users\hp> kubectl get pods                                                                                                                                                                                                             NAME                          READY   STATUS    RESTARTS   AGE
+hello-node-677b9cfc6b-qc7nc   1/1     Running   0          2m8s
+PS C:\Users\hp> kubectl get events                                                                                                                                                                                                           LAST SEEN   TYPE     REASON                    OBJECT                             MESSAGE
+2m25s       Normal   Scheduled                 pod/hello-node-677b9cfc6b-qc7nc    Successfully assigned default/hello-node-677b9cfc6b-qc7nc to minikube
+2m23s       Normal   Pulling                   pod/hello-node-677b9cfc6b-qc7nc    Pulling image "gcr.io/hello-minikube-zero-install/hello-node"
+60s         Normal   Pulled                    pod/hello-node-677b9cfc6b-qc7nc    Successfully pulled image "gcr.io/hello-minikube-zero-install/hello-node"
+58s         Normal   Created                   pod/hello-node-677b9cfc6b-qc7nc    Created container hello-node
+57s         Normal   Started                   pod/hello-node-677b9cfc6b-qc7nc    Started container hello-node
+2m26s       Normal   SuccessfulCreate          replicaset/hello-node-677b9cfc6b   Created pod: hello-node-677b9cfc6b-qc7nc
+2m26s       Normal   ScalingReplicaSet         deployment/hello-node              Scaled up replica set hello-node-677b9cfc6b to 1
+5m32s       Normal   Starting                  node/minikube                      Starting kubelet.
+5m32s       Normal   RegisteredNode            node/minikube                      Node minikube event: Registered Node minikube in Controller
+5m32s       Normal   NodeHasSufficientMemory   node/minikube                      Node minikube status is now: NodeHasSufficientMemory
+5m32s       Normal   NodeHasNoDiskPressure     node/minikube                      Node minikube status is now: NodeHasNoDiskPressure
+5m32s       Normal   NodeHasSufficientPID      node/minikube                      Node minikube status is now: NodeHasSufficientPID
+5m32s       Normal   NodeAllocatableEnforced   node/minikube                      Updated Node Allocatable limit across pods
+5m31s       Normal   NodeReady                 node/minikube                      Node minikube status is now: NodeReady
+5m13s       Normal   Starting                  node/minikube                      Starting kube-proxy.
+PS C:\Users\hp> kubectl config view                                                                                                                                                                                                          apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: C:\SPB_Data\.minikube\ca.crt
+    server: https://172.17.183.76:8443
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    user: minikube
+  name: minikube
+current-context: minikube
+kind: Config
+preferences: {}
+users:
+- name: minikube
+  user:
+    client-certificate: C:\SPB_Data\.minikube\profiles\minikube\client.crt
+    client-key: C:\SPB_Data\.minikube\profiles\minikube\client.key
+PS C:\Users\hp> kubectl expose deployment hello-node --type=LoadBalancer --port=8080                                                                                                                                                         service/hello-node exposed
+PS C:\Users\hp> kubectl get services                                                                                                                                                                                                         NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+hello-node   LoadBalancer   10.109.112.19   <pending>     8080:31901/TCP   12s
+kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          7m50s
+PS C:\Users\hp> minikube service hello-node                                                                                                                                                                                                  |-----------|------------|-------------|----------------------------|
+| NAMESPACE |    NAME    | TARGET PORT |            URL             |
+|-----------|------------|-------------|----------------------------|
+| default   | hello-node |        8080 | http://172.17.183.76:31901 |
+|-----------|------------|-------------|----------------------------|
+* Opening service default/hello-node in default browser...
+PS C:\Users\hp> minikube addons list                                                                                                                                                                                                         |-----------------------------|----------|--------------|
+|         ADDON NAME          | PROFILE  |    STATUS    |
+|-----------------------------|----------|--------------|
+| dashboard                   | minikube | enabled ✅   |
+| default-storageclass        | minikube | enabled ✅   |
+| efk                         | minikube | disabled     |
+| freshpod                    | minikube | disabled     |
+| gvisor                      | minikube | disabled     |                                                                                                                                                                                    | helm-tiller                 | minikube | disabled     |                                                                                                                                                                                    | ingress                     | minikube | disabled     |                                                                                                                                                                                    | ingress-dns                 | minikube | disabled     |                                                                                                                                                                                    | istio                       | minikube | disabled     |                                                                                                                                                                                    | istio-provisioner           | minikube | disabled     |                                                                                                                                                                                    | logviewer                   | minikube | disabled     |                                                                                                                                                                                    | metrics-server              | minikube | disabled     |                                                                                                                                                                                    | nvidia-driver-installer     | minikube | disabled     |                                                                                                                                                                                    | nvidia-gpu-device-plugin    | minikube | disabled     |                                                                                                                                                                                    | registry                    | minikube | disabled     |                                                                                                                                                                                    | registry-aliases            | minikube | disabled     |
+| registry-creds              | minikube | disabled     |
+| storage-provisioner         | minikube | enabled ✅   |
+| storage-provisioner-gluster | minikube | disabled     |
+|-----------------------------|----------|--------------|
+PS C:\Users\hp> minikube addons enable metrics-server                                                                                                                                                                                        * The 'metrics-server' addon is enabled
+PS C:\Users\hp> kubectl get pod, svc -n kube-system                                                                                                                                                                                          Error from server (NotFound): pods "svc" not found
+PS C:\Users\hp> kubectl get pods                                                                                                                                                                                                             NAME                          READY   STATUS    RESTARTS   AGE
+hello-node-677b9cfc6b-qc7nc   1/1     Running   0          8m52s
+PS C:\Users\hp> kubectl get pod,svc -n kube-system                                                                                                                                                                                           NAME                                   READY   STATUS    RESTARTS   AGE
+pod/coredns-66bff467f8-7lgln           1/1     Running   0          12m
+pod/coredns-66bff467f8-c8nrw           1/1     Running   0          12m
+pod/etcd-minikube                      1/1     Running   0          12m
+pod/kube-apiserver-minikube            1/1     Running   0          12m
+pod/kube-controller-manager-minikube   1/1     Running   0          12m
+pod/kube-proxy-8nv9d                   1/1     Running   0          12m
+pod/kube-scheduler-minikube            1/1     Running   0          12m
+pod/metrics-server-7bc6d75975-lzptq    1/1     Running   0          73s
+pod/storage-provisioner                1/1     Running   0          12m
+
+NAME                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+service/kube-dns         ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   12m
+service/metrics-server   ClusterIP   10.98.232.249   <none>        443/TCP                  74s
+PS C:\Users\hp> minikube dashboard                                                                                                                                                                                                           * Verifying dashboard health ...
+* Launching proxy ...
+* Verifying proxy health ...
+* Opening http://127.0.0.1:54751/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+PS C:\Users\hp> minikube addons disable metrics-server                                                                                                                                                                                       * "The 'metrics-server' addon is disabled
+PS C:\Users\hp> kubectl delete service hello-node                                                                                                                                                                                            service "hello-node" deleted
+PS C:\Users\hp> kubectl delete deployment hello-node                                                                                                                                                                                         deployment.apps "hello-node" deleted
+PS C:\Users\hp> minikube stop                                                                                                                                                                                                                * Stopping "minikube" in hyperv ...
+* Powering off "minikube" via SSH ...
+* Node "m01" stopped.
+PS C:\Users\hp> minikube delete                                                                                                                                                                                                              * Stopping "minikube" in hyperv ...
+* Deleting "minikube" in hyperv ...
+* Removed all traces of the "minikube" cluster.
+PS C:\Users\hp>                                                                                                                                                                                                                              
