@@ -1,0 +1,11 @@
+Data Engineering, Big Data, and Machine Learning on GCP Specialization
+
+https://www.coursera.org/specializations/gcp-data-machine-learning
+
+Advanced Machine Learning with TensorFlow on Google Cloud Platform Specialization (Advanced)
+
+https://www.coursera.org/specializations/advanced-machine-learning-tensorflow-gcp
+
+Machine Learning with TensorFlow on Google Cloud Platform Specialization (Basic)
+
+https://www.coursera.org/specializations/machine-learning-tensorflow-gcp
