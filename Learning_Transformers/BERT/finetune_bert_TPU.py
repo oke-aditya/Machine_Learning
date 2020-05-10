@@ -176,7 +176,7 @@ def run():
 		spear = np.mean(spear)
 		print(f" epoch = {epoch} pearman = {spear}")
 
-
+ 
 if __name__ == '__main__':
 	run()
 
