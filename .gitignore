@@ -121,3 +121,6 @@ Face_detection/known_images/
 Face_detection/uknown_images/
 Face_detection/.vscode/
 /Deploying_Models/learning_docker/Jenkins_Home/
+
+# data
+Learning_Transformers/BERT/data/
