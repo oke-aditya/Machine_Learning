@@ -3,7 +3,7 @@ import torch.nn as nn
 from tqdm import tqdm
 
 def loss_fn(outputs, targets):
-    return nn.BCEWithLogitsLoss()(outputs, targets)
+    return nn.BCEWithLogitsLoss()(outputs, targets.view(-1, 1))
 
 def train_fn(data_loader, model, optimizer, scheduler, device):
     model.train()
@@ -51,10 +51,5 @@ def eval_fn(data_loader, model, device):
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
 
     return fin_outputs, fin_targets
-
-
-
-
-
 
 

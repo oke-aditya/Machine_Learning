@@ -26,7 +26,7 @@ class BERTDataset:
         )
 
         ids = inputs["input_ids"]
-        mask = inputs["attention_masks"]
+        mask = inputs["attention_mask"]
         token_type_ids = inputs["token_type_ids"]
 
         # BERT We need to padd on right side.
