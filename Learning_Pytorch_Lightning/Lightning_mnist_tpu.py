@@ -16,36 +16,56 @@ from torchvision.datasets import MNIST
 from torchvision import transforms
 import pytorch_lightning as pl
 
-class mnist_cnn(pl.lightning_module):
+class mnist_cnn(pl.LightningModule):
 
-    def __init__(self):
+    def __init__(self, hparams=None):
         super().__init__()
-        self.l1 = nn.Linear(28 * 28, 10)
-    
+        
+        # get hyperparams, etc...
+        self.hparams = hparams
+
+        # not the best model...
+        self.l1 = torch.nn.Linear(28 * 28, 10)
+
     def forward(self, x):
-        return torch.relu(self.l1(x.view(x.size[0], -1)))
-    
+        # called with self(x)
+        return torch.relu(self.l1(x.view(x.size(0), -1)))
+
     def training_step(self, batch, batch_idx):
+        # REQUIRED
         x, y = batch
         y_hat = self(x)
-        train_loss = F.cross_entropy(y_hat, y)
-        return {"train_loss" : train_loss}
+        loss = F.cross_entropy(y_hat, y)
+        tensorboard_logs = {'train_loss': loss}
+        return {'loss': loss, 'log': tensorboard_logs}
 
     def validation_step(self, batch, batch_idx):
+        # OPTIONAL
         x, y = batch
         y_hat = self(x)
         val_loss = F.cross_entropy(y_hat, y)
-        return {"val_loss" : val_loss}
-    
+        return {'val_loss': val_loss}
+
+    def validation_epoch_end(self, outputs):
+        # OPTIONAL
+        avg_loss = torch.stack([x['val_loss'] for x in outputs]).mean()
+        tensorboard_logs = {'val_loss': avg_loss}
+        return {'val_loss': avg_loss, 'log': tensorboard_logs}
+        
     def test_step(self, batch, batch_idx):
+        # OPTIONAL
         x, y = batch
         y_hat = self(x)
-        test_loss = F.cross_entropy(y_hat, y)
-        return {"test_loss" : test_loss}
-    
-    def configure_optimizers(self, x):
-        return torch.optim.Adam(self.parameters(), lr=0.0001)
-    
+        return {'test_loss': F.cross_entropy(y_hat, y)}
+
+    def test_epoch_end(self, outputs):
+        avg_loss = torch.stack([x['test_loss'] for x in outputs]).mean()
+        tensorboard_logs = {'test_loss': avg_loss}
+        return {'test_loss': avg_loss, 'log': tensorboard_logs}
+
+    def configure_optimizers(self):
+        return torch.optim.Adam(self.parameters(), lr=0.001)
+
     def prepare_data(self):
         self.mnist_train = MNIST(os.getcwd(), train=True, download=True, transform=transforms.ToTensor())
         self.mnist_test = MNIST(os.getcwd(), train=False, download=True, transform=transforms.ToTensor())
