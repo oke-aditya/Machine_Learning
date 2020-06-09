@@ -16,7 +16,7 @@ from torchvision.datasets import MNIST
 from torchvision import transforms
 import pytorch_lightning as pl
 
-class mnist_cnn(pl.LightningModule):
+class mnist_nn(pl.LightningModule):
 
     def __init__(self, hparams=None):
         super().__init__()
