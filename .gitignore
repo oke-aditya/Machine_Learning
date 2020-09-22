@@ -1,3 +1,16 @@
+# Zips
+*.gz
+*.tar.gz
+*ubyte
+
+# Models
+*.onnx
+*.pt
+*.pth
+
+# Some folders
+Learning_Pytorch_Lightning/MNIST/
+Learning_Pytorch_Lightning/lightning_logs/
 # Byte-compiled / optimized / DLL files
 *.__pycache__
 *.py[cod]
